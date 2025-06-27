@@ -11,30 +11,63 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
   <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
   <style id="app-style">
+    /* CSS Variables for Theme */
+    :root {
+      --primary-bg: #111827; /* Dark Black/Navy */
+      --secondary-bg: #1F2937; /* Slightly lighter dark gray for cards */
+      --primary-text: #F9FAFB; /* Light Gray / Off-White */
+      --secondary-text: #E2E8F0; /* Muted Light Gray */
+      --accent-orange: #FF6600; /* Vibrant Orange */
+      --accent-gold: #FFD700; /* Gold */
+      --gradient-start: var(--accent-orange);
+      --gradient-end: var(--accent-gold);
+      --nav-link-color: #94A3B8; /* Muted Gray for navigation links */
+      --nav-link-hover: var(--accent-orange);
+      --card-border-color: rgba(71, 85, 105, 0.3);
+      --shadow-color-dark: rgba(0, 0, 0, 0.4);
+      --shadow-color-light: rgba(255, 102, 0, 0.2);
+    }
+
+    .light-mode {
+      --primary-bg: #F9FAFB; /* Very Light Gray / Off-White */
+      --secondary-bg: #E5E7EB; /* Light Gray for cards */
+      --primary-text: #FF9966; /* Light Orange for text in light mode */
+      --secondary-text: #374151; /* Darker Gray */
+      --accent-orange: #FF6600; /* Same Vibrant Orange */
+      --accent-gold: #FFD700; /* Same Gold */
+      --gradient-start: var(--accent-orange);
+      --gradient-end: var(--accent-gold);
+      --nav-link-color: #4B5563; /* Darker Gray for navigation links */
+      --nav-link-hover: var(--accent-orange);
+      --card-border-color: rgba(156, 163, 175, 0.5); /* Lighter border */
+      --shadow-color-dark: rgba(0, 0, 0, 0.1);
+      --shadow-color-light: rgba(255, 102, 0, 0.1);
+    }
+
     html {
       scroll-behavior: smooth;
-      height: 100%; /* Ensures the html element takes full viewport height */
+      height: 100%;
     }
 
     body {
-      font-family: 'Roboto', sans-serif; /* Clean body font, similar to inspiration */
-      background-color: #0F172A; /* Deep Navy Blue, a dark base */
-      color: #E2E8F0; /* Light Gray Text for readability */
-      min-height: 100vh; /* Ensures body takes at least full viewport height */
-      overflow-x: hidden; /* Prevents horizontal scrolling, crucial for responsive design */
-      width: 100%; /* Ensures body takes full width */
-      display: flex; /* Uses flexbox for main layout */
-      flex-direction: column; /* Stacks children vertically */
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--primary-bg);
+      color: var(--secondary-text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.5s ease, color 0.5s ease; /* Smooth transition for theme change */
     }
 
     h1, h2, h3, h4, h5, h6 {
-      font-family: 'Poppins', sans-serif; /* Poppins for headings, provides a modern feel */
-      color: #CBD5E1; /* Muted Light Blue-Gray for headings */
+      font-family: 'Poppins', sans-serif;
+      color: var(--primary-text); /* Headings use primary text color */
     }
 
     .gradient-text {
-      /* Subtle gradient: from a deep blue to a softer teal, for accent */
-      background: linear-gradient(90deg, #3B82F6, #06B6D4);
+      background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -42,7 +75,7 @@
 
     .nav-link {
       position: relative;
-      color: #94A3B8; /* Muted Gray for navigation links */
+      color: var(--nav-link-color);
       transition: color 0.3s ease;
     }
 
@@ -53,12 +86,12 @@
       height: 2px;
       bottom: -4px;
       left: 0;
-      background-color: #FBBF24; /* Accent Gold for hover underline */
+      background-color: var(--nav-link-hover);
       transition: width 0.3s ease;
     }
 
     .nav-link:hover {
-      color: #FBBF24; /* Accent Gold on hover */
+      color: var(--nav-link-hover);
     }
 
     .nav-link:hover::after {
@@ -67,112 +100,113 @@
 
     .btn-primary {
       transition: all 0.3s ease;
-      background: linear-gradient(90deg, #3B82F6, #2563EB); /* Blue gradient button */
-      color: white; /* White text on gradient buttons */
+      background: linear-gradient(90deg, var(--accent-orange), #FF8C00); /* Orange gradient */
+      color: white;
       border: none;
-      border-radius: 0.5rem; /* Rounded corners for buttons */
-      box-shadow: 0 4px 10px rgba(59, 130, 246, 0.4);
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 10px var(--shadow-color-light);
     }
 
     .btn-primary:hover {
-      transform: translateY(-2px); /* Slight lift on hover */
-      box-shadow: 0 8px 20px rgba(59, 130, 246, 0.6); /* Enhanced blue glow on hover */
-      background: linear-gradient(90deg, #2563EB, #1D4ED8); /* Darker blue on hover */
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px var(--shadow-color-light);
+      background: linear-gradient(90deg, #E65C00, #CC7A00); /* Darker orange on hover */
     }
 
     .btn-secondary {
         transition: all 0.3s ease;
         background-color: transparent;
-        border: 2px solid #FBBF24; /* Accent Gold border */
-        color: #FBBF24; /* Accent Gold text */
-        border-radius: 0.5rem; /* Rounded corners for buttons */
-        box-shadow: 0 4px 10px rgba(251, 191, 36, 0.2);
+        border: 2px solid var(--accent-orange);
+        color: var(--accent-orange);
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 10px rgba(255, 102, 0, 0.2);
     }
 
     .btn-secondary:hover {
-        transform: translateY(-2px); /* Slight lift on hover */
-        background-color: #FBBF24; /* Accent Gold fill on hover */
-        color: #0F172A; /* Dark Navy text on hover */
-        box-shadow: 0 8px 20px rgba(251, 191, 36, 0.4);
+        transform: translateY(-2px);
+        background-color: var(--accent-orange);
+        color: var(--primary-bg); /* Text adapts to background */
+        box-shadow: 0 8px 20px rgba(255, 102, 0, 0.4);
     }
 
     .card {
       transition: all 0.3s ease;
-      background-color: rgba(30, 41, 59, 0.6); /* Slightly transparent dark blue-gray for cards */
-      border: 1px solid rgba(71, 85, 105, 0.3); /* Soft border for cards */
-      border-radius: 0.75rem; /* Smoother rounded corners for cards */
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      background-color: var(--secondary-bg);
+      border: 1px solid var(--card-border-color);
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 15px var(--shadow-color-dark);
     }
 
     .card:hover {
-      transform: translateY(-5px); /* Lift card on hover */
-      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3), 0 4px 15px rgba(251, 191, 36, 0.3); /* Dual subtle glow on hover */
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px var(--shadow-color-light);
     }
 
     .skill-card {
       transition: all 0.2s ease;
-      background-color: rgba(45, 55, 72, 0.5); /* Another transparent dark shade for skill cards */
-      border: 1px solid rgba(71, 85, 105, 0.2); /* Even softer border for skill cards */
-      border-radius: 0.5rem; /* Slightly less rounded for skill cards */
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background-color: var(--secondary-bg); /* Use secondary background for consistency */
+      border: 1px solid var(--card-border-color);
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 8px var(--shadow-color-dark);
     }
 
     .skill-card:hover {
-      transform: translateY(-3px); /* Lift skill card on hover */
-      box-shadow: 0 5px 15px rgba(6, 182, 212, 0.4); /* Soft teal glow on hover */
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px var(--shadow-color-light);
     }
 
-    /* Tagline for typing animation */
     #animated-tagline {
       display: inline-block;
-      min-height: 1.5em; /* Ensure consistent height during animation */
-      color: #06B6D4; /* Soft Teal for the typing text */
+      min-height: 1.5em;
+      color: var(--accent-orange); /* Tagline accent color */
     }
 
-    /* Custom scrollbar for ethereal elegance theme */
     ::-webkit-scrollbar {
       width: 8px;
     }
 
     ::-webkit-scrollbar-track {
-      background: #0F172A; /* Deep Navy Blue track */
+      background: var(--primary-bg);
     }
 
     ::-webkit-scrollbar-thumb {
-      background: linear-gradient(180deg, #3B82F6, #06B6D4); /* Blue to Teal gradient thumb */
+      background: linear-gradient(180deg, var(--accent-orange), var(--accent-gold));
       border-radius: 10px;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-      background: linear-gradient(180deg, #FBBF24, #EF4444); /* Gold to Red on hover, for a touch of warmth */
+      background: linear-gradient(180deg, var(--accent-gold), var(--accent-orange));
     }
 
-    /* Mobile menu */
     .mobile-menu {
       transform: translateY(-100%);
       transition: transform 0.3s ease-in-out;
-      background-color: rgba(15, 23, 42, 0.95); /* Semi-transparent dark navy for mobile menu */
+      background-color: rgba(17, 24, 39, 0.95); /* Adjusted for dark mode */
     }
-
+    .light-mode .mobile-menu {
+      background-color: rgba(249, 250, 251, 0.95); /* Adjusted for light mode */
+      color: var(--primary-text);
+    }
+    .mobile-menu a {
+        color: var(--secondary-text);
+    }
     .mobile-menu.active {
       transform: translateY(0);
     }
 
-    /* Hero Section with background image and overlay */
     #home {
-      /* Updated: Your background image URL will now be your uploaded picture */
       background-image: url('image.png');
-      background-size: cover; /* Ensures image covers the whole section */
-      background-position: center; /* Centers the image */
-      background-repeat: no-repeat; /* Prevents image repetition */
-      position: relative; /* Needed for the pseudo-element overlay */
-      z-index: 1; /* Ensures content is above the pseudo-element overlay */
-      display: flex; /* Uses flexbox for content alignment */
-      flex-direction: column; /* Stacks content vertically */
-      align-items: center; /* Centers content horizontally */
-      justify-content: center; /* Centers content vertically */
-      min-height: 100vh; /* Ensures it takes at least full viewport height */
-      padding-top: 5rem; /* Add padding to account for fixed header */
+      background-size: cover;
+      background-position: center bottom; /* Adjusted to show the lower part of the image */
+      background-repeat: no-repeat;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding-top: 5rem;
       padding-bottom: 5rem;
     }
 
@@ -183,25 +217,33 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(15, 23, 42, 0.7); /* Dark semi-transparent overlay */
-      z-index: -1; /* Places overlay behind content but above background image */
+      background-color: rgba(17, 24, 39, 0.7); /* Dark overlay */
+      z-index: -1;
+    }
+    .light-mode #home::before {
+      background-color: rgba(249, 250, 251, 0.7); /* Light overlay */
     }
 
-    /* Ensure content inside #home is visible over the overlay */
     #home > .container {
       position: relative;
       z-index: 10;
     }
 
-    /* General section styling for consistent look */
     section {
-      padding-top: 6rem; /* Top padding for sections */
-      padding-bottom: 6rem; /* Bottom padding for sections */
-      width: 100%; /* Ensure sections take full width */
-      box-sizing: border-box; /* Include padding in width calculation */
+      padding-top: 6rem;
+      padding-bottom: 6rem;
+      width: 100%;
+      box-sizing: border-box;
+      background-color: var(--primary-bg);
+      transition: background-color 0.5s ease;
+    }
+    section:nth-of-type(even) { /* Alternate section background */
+        background-color: var(--secondary-bg);
+    }
+    .light-mode section:nth-of-type(even) {
+        background-color: var(--secondary-bg);
     }
 
-    /* Adjust padding for mobile to prevent content from being hidden by fixed header */
     @media (max-width: 768px) {
       section {
         padding-top: 5rem;
@@ -210,180 +252,215 @@
     }
 
     .elaborate-btn {
-        background: linear-gradient(90deg, #FBBF24, #EF4444); /* Gold to Red gradient */
-        color: #0F172A; /* Dark text on gradient */
+        background: linear-gradient(90deg, var(--accent-orange), var(--accent-gold));
+        color: var(--primary-bg); /* Text adapts to background */
         font-weight: 600;
         padding: 0.5rem 1rem;
         border-radius: 0.5rem;
-        box-shadow: 0 4px 8px rgba(251, 191, 36, 0.4);
+        box-shadow: 0 4px 8px var(--shadow-color-light);
         transition: all 0.2s ease-in-out;
     }
 
     .elaborate-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 12px rgba(251, 191, 36, 0.6);
-        background: linear-gradient(90deg, #EF4444, #FBBF24); /* Reverse gradient on hover */
+        box-shadow: 0 6px 12px var(--shadow-color-light);
+        background: linear-gradient(90deg, var(--accent-gold), var(--accent-orange));
     }
 
     /* Education Roadmap Specific Styles */
     .roadmap-container {
       position: relative;
-      padding-bottom: 1rem; /* Space after last item */
+      padding-bottom: 1rem;
       margin-left: auto;
       margin-right: auto;
-      max-width: 900px; /* Increased max width for better spacing */
-      display: flex; /* Default to flex for mobile (single column) */
+      max-width: 900px;
+      display: flex;
       flex-direction: column;
-      align-items: flex-start; /* Align items to the start for mobile timeline */
+      align-items: flex-start;
     }
 
     .roadmap-line {
       position: absolute;
-      left: 1rem; /* Aligns with circle centers on mobile */
+      left: 1rem;
       top: 0;
       bottom: 0;
       width: 2px;
-      background: linear-gradient(to bottom, #3B82F6, #06B6D4);
+      background: linear-gradient(to bottom, var(--accent-orange), var(--accent-gold)); /* Line uses accent gradient */
       border-radius: 1px;
     }
 
     .roadmap-item {
       position: relative;
-      margin-bottom: 3rem; /* Space between items */
-      padding-left: 2.5rem; /* Offset for content from the line on mobile */
-      width: 100%; /* Full width on mobile */
+      margin-bottom: 3rem;
+      padding-left: 2.5rem;
+      width: 100%;
     }
 
     .roadmap-item:last-child {
-      margin-bottom: 0; /* No margin after the last item */
+      margin-bottom: 0;
     }
 
     .roadmap-circle {
       position: absolute;
-      left: 0; /* Aligns with roadmap-line on mobile */
-      top: 0; /* Positioned at the top of the flex item, adjusted by transform */
-      width: 2rem; /* Slightly larger circle */
+      left: 0;
+      top: 0;
+      width: 2rem;
       height: 2rem;
-      background-color: #FBBF24; /* Accent gold circle */
-      border: 2px solid #3B82F6; /* Blue border */
+      background-color: var(--accent-orange);
+      border: 2px solid var(--accent-gold);
       border-radius: 50%;
       z-index: 10;
-      box-shadow: 0 0 10px rgba(251, 191, 36, 0.5); /* Gold glow */
+      box-shadow: 0 0 10px rgba(255, 102, 0, 0.5);
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem; /* Larger font for number */
+      font-size: 1rem;
       font-weight: bold;
-      color: #0F172A; /* Dark text for the number */
-      transform: translateY(-50%); /* Adjust to vertically center on the line */
+      color: var(--primary-bg); /* Circle text adapts to primary background */
+      transform: translateY(-50%);
     }
 
     .roadmap-item:hover .roadmap-circle {
-        transform: translateY(-50%) scale(1.2); /* Slight lift and scale on hover */
-        box-shadow: 0 0 15px rgba(251, 191, 36, 0.8), 0 0 25px rgba(59, 130, 246, 0.5); /* Enhanced glow */
+        transform: translateY(-50%) scale(1.2);
+        box-shadow: 0 0 15px rgba(255, 102, 0, 0.8), 0 0 25px rgba(255, 215, 0, 0.5);
     }
 
     .roadmap-content {
-      background-color: rgba(30, 41, 59, 0.8); /* Slightly transparent dark blue-gray */
-      border: 1px solid rgba(71, 85, 105, 0.4);
+      background-color: var(--secondary-bg);
+      border: 1px solid var(--card-border-color);
       border-radius: 0.75rem;
       padding: 1.5rem;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 15px var(--shadow-color-dark);
       transition: all 0.3s ease;
       position: relative;
-      width: 100%; /* Full width within its roadmap-item */
-      box-sizing: border-box; /* Include padding in width */
-      text-align: left; /* Default text alignment */
+      width: 100%;
+      box-sizing: border-box;
+      text-align: left;
     }
 
     .roadmap-content:hover {
         transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+        box-shadow: 0 8px 20px var(--shadow-color-light);
     }
     
+    /* Desktop adjustments for Education Roadmap (single column) */
     @media (min-width: 768px) {
       .roadmap-container {
-        display: grid; /* Use grid for desktop */
-        grid-template-columns: 1fr 2px 1fr; /* Left content, center line, right content */
-        gap: 0; /* No gap between columns */
-        align-items: start; /* Align items to the start of their grid row */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-left: 0;
       }
 
       .roadmap-line {
-        grid-column: 2; /* Place line in the central grid column */
-        left: 0; /* Reset left as grid handles horizontal position */
-        transform: none; /* Reset transform */
+        left: 50%;
+        transform: translateX(-50%);
       }
 
       .roadmap-item {
-        margin-bottom: 0; /* Reset margin as row-gap handles spacing */
-        padding-left: 0; /* Reset padding as grid handles horizontal position */
-        width: auto; /* Allow grid to control width */
-        display: contents; /* Allows children to participate in the grid directly */
+        width: 100%;
+        max-width: 600px;
+        padding-left: 0;
+        margin-bottom: 3rem;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
       }
-      
+
       .roadmap-item:last-child {
         margin-bottom: 0;
       }
 
       .roadmap-item .roadmap-circle {
-        position: relative; /* Make circle relative for grid positioning */
-        grid-column: 2; /* Place circle in the central grid column */
-        left: 0; /* Reset left */
-        top: auto; /* Reset top */
-        transform: translateX(-50%); /* Only horizontal centering for the circle itself */
-        justify-self: center; /* Center horizontally within its grid cell */
-        align-self: start; /* Align to the top of its grid cell */
-        margin-top: 1.25rem; /* Adjust based on content card padding to align with heading */
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        margin-top: 0;
+        z-index: 10;
       }
 
-      .roadmap-item:nth-child(odd) .roadmap-content {
-        grid-column: 1; /* Place odd items in the first column (left) */
-        margin-right: 2rem; /* Space between card and line */
-        margin-left: auto; /* Push to the right edge of its column */
-        text-align: right; /* Align text to the right for left-aligned cards */
-      }
-      .roadmap-item:nth-child(even) .roadmap-content {
-        grid-column: 3; /* Place even items in the third column (right) */
-        margin-left: 2rem; /* Space between card and line */
-        margin-right: auto; /* Push to the left edge of its column */
-        text-align: left; /* Align text to the left for right-aligned cards */
+      .roadmap-content {
+        width: calc(100% - 4rem);
+        margin-left: 2rem;
+        margin-right: 0;
+        text-align: left;
+        flex-grow: 1;
       }
 
       .roadmap-content::before {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 0;
-        border-style: solid;
-        top: 1.5rem; /* Vertically center the arrow */
-        z-index: 1;
-      }
-
-      /* Arrow for odd items (left side content) */
-      .roadmap-item:nth-child(odd) .roadmap-content::before {
-        border-width: 15px 0 15px 15px; /* Right-pointing triangle */
-        border-color: transparent transparent transparent rgba(30, 41, 59, 0.8);
-        right: -15px; /* Position to the right edge of the card */
-      }
-
-      /* Arrow for even items (right side content) */
-      .roadmap-item:nth-child(even) .roadmap-content::before {
-        border-width: 15px 15px 15px 0; /* Left-pointing triangle */
-        border-color: transparent rgba(30, 41, 59, 0.8) transparent transparent;
-        left: -15px; /* Position to the left edge of the card */
+        left: -15px;
+        border-width: 15px 15px 15px 0;
+        border-color: transparent var(--secondary-bg) transparent transparent; /* Arrow color matches card background */
+        right: auto;
       }
     }
 
+    /* Keyframes for the ring animation */
+    @keyframes rotateRing {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .animated-ring {
+      animation: rotateRing 10s linear infinite;
+      transform-origin: center center;
+    }
+
+    /* Mode Switch Button Styling */
+    #modeSwitchBtn {
+      position: fixed;
+      bottom: 6rem; /* Above back to top button */
+      right: 1.5rem;
+      background-color: var(--accent-orange);
+      color: var(--primary-bg);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      z-index: 1000;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+      font-size: 1.5rem; /* Larger icon */
+    }
+
+    #modeSwitchBtn:hover {
+      transform: scale(1.1);
+    }
   </style>
 </head>
 <body class="bg-dark-bg text-gray-200">
   <header class="fixed w-full bg-transparent shadow-lg z-50 backdrop-filter backdrop-blur-md bg-opacity-30 border-b border-gray-800">
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-      <a href="#home" class="text-xl font-bold text-gray-100 flex items-center">
-        <span class="gradient-text">RC</span>
-        <span class="text-gray-400 ml-2 text-sm hidden sm:inline-block">Rajeswar Charapalli</span>
+      <!-- "RAJ" Logo as SVG with animated ring -->
+      <a href="#home" class="flex items-center group">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="transition-transform duration-300 group-hover:scale-105">
+          <!-- Background circle/square for the logo -->
+          <rect x="2" y="2" width="44" height="44" rx="10" fill="url(#gradient-logo-main)" stroke="var(--primary-text)" stroke-width="2" stroke-opacity="0.7"/>
+          
+          <!-- Animated ring -->
+          <path class="animated-ring" fill="none" stroke="var(--accent-orange)" stroke-width="2.5" 
+                d="M24 6 C35.045 6 44 14.955 44 26 C44 37.045 35.045 46 24 46 C12.955 46 4 37.045 4 26 C4 14.955 12.955 6 24 6 Z"
+                stroke-dasharray="80 160" stroke-linecap="round"/>
+
+          <!-- Inner fixed ring (optional, can adjust for desired effect) -->
+          <circle cx="24" cy="24" r="14" fill="none" stroke="var(--accent-gold)" stroke-width="1.5" stroke-opacity="0.8" />
+          
+          <!-- "RAJ" Text -->
+          <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="'Poppins', sans-serif" font-weight="700" font-size="18" fill="white">RAJ</text>
+          
+          <defs>
+            <linearGradient id="gradient-logo-main" x1="0%" y1="0%" y2="100%">
+              <stop offset="0%" stop-color="var(--accent-orange)" />
+              <stop offset="100%" stop-color="var(--accent-gold)" />
+            </linearGradient>
+          </defs>
+        </svg>
       </a>
       
       <nav class="hidden md:flex">
@@ -420,9 +497,9 @@
 
   <section id="home" class="text-gray-200">
     <div class="container mx-auto text-center" data-aos="fade-up" data-aos-duration="1000">
-      <h1 class="text-5xl md:text-6xl font-bold mb-4 text-gray-100 leading-tight" data-aos="fade-up" data-aos-delay="200">Rajeswar Charapalli</h1>
-      <h2 class="text-2xl md:text-3xl text-gray-400 mb-6" data-aos="fade-up" data-aos-delay="300">B.Tech CSE Student (5th Semester)</h2>
-      <p class="text-xl md:text-2xl text-soft-blue mb-10" data-aos="fade-up" data-aos-delay="400">
+      <h1 class="text-5xl md:text-6xl font-bold mb-4 text-primary-text leading-tight" data-aos="fade-up" data-aos-delay="200">Rajeswar Charapalli</h1>
+      <h2 class="text-2xl md:text-3xl text-secondary-text mb-6" data-aos="fade-up" data-aos-delay="300">B.Tech CSE Student (5th Semester)</h2>
+      <p class="text-xl md:text-2xl mb-10" data-aos="fade-up" data-aos-delay="400">
         <span id="animated-tagline" class="tagline-animated"></span>
       </p>
       
@@ -455,7 +532,7 @@
     <div class="container mx-auto px-4">
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 relative" data-aos="fade-up">
         <span class="gradient-text">About Me</span>
-        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-accent-gold rounded-full shadow-md shadow-accent-gold/40"></div>
+        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-accent-orange rounded-full shadow-md shadow-orange-500/40"></div>
       </h2>
 
       <div class="flex flex-col md:flex-row items-center md:space-x-12">
@@ -470,12 +547,12 @@
             I'm an ambivert, kind-hearted, thoughtful, and a good listener. I believe in continuous learning and applying technical knowledge to solve real-world problems.
           </p>
           <div class="flex flex-wrap gap-3 mb-8">
-            <span class="px-4 py-1 bg-soft-blue text-white rounded-full text-sm font-medium shadow-sm">B.Tech CSE</span>
-            <span class="px-4 py-1 bg-soft-blue text-white rounded-full text-sm font-medium shadow-sm">CGPA: 7.42</span>
-            <span class="px-4 py-1 bg-soft-blue text-white rounded-full text-sm font-medium shadow-sm">5th Semester</span>
-            <span class="px-4 py-1 bg-soft-blue text-white rounded-full text-sm font-medium shadow-sm">Python</span>
-            <span class="px-4 py-1 bg-soft-blue text-white rounded-full text-sm font-medium shadow-sm">Web Development</span>
-            <span class="px-4 py-1 bg-soft-blue text-white rounded-full text-sm font-medium shadow-sm">Generative AI</span>
+            <span class="px-4 py-1 bg-gradient-to-r from-orange-600 to-amber-500 text-white rounded-full text-sm font-medium shadow-sm">B.Tech CSE</span>
+            <span class="px-4 py-1 bg-gradient-to-r from-orange-600 to-amber-500 text-white rounded-full text-sm font-medium shadow-sm">CGPA: 7.42</span>
+            <span class="px-4 py-1 bg-gradient-to-r from-orange-600 to-amber-500 text-white rounded-full text-sm font-medium shadow-sm">5th Semester</span>
+            <span class="px-4 py-1 bg-gradient-to-r from-orange-600 to-amber-500 text-white rounded-full text-sm font-medium shadow-sm">Python</span>
+            <span class="px-4 py-1 bg-gradient-to-r from-orange-600 to-amber-500 text-white rounded-full text-sm font-medium shadow-sm">Web Development</span>
+            <span class="px-4 py-1 bg-gradient-to-r from-orange-600 to-amber-500 text-white rounded-full text-sm font-medium shadow-sm">Generative AI</span>
           </div>
 
           <div class="text-center md:text-left mt-8">
@@ -490,13 +567,13 @@
 
         <div class="md:w-1/2" data-aos="fade-left">
           <div class="card p-8 relative">
-            <h3 class="text-2xl font-semibold mb-4 text-soft-blue">Personal Motto</h3>
-            <p class="text-2xl italic text-accent-gold font-medium leading-relaxed">
+            <h3 class="text-2xl font-semibold mb-4 text-primary-text">Personal Motto</h3>
+            <p class="text-2xl italic text-accent-orange font-medium leading-relaxed">
               "Built from doubt. Driven by growth. Wired to win"
             </p>
             <div class="my-8 border-b border-gray-700"></div>
             
-            <h3 class="text-xl font-semibold mb-4 text-soft-blue">Languages</h3>
+            <h3 class="text-xl font-semibold mb-4 text-primary-text">Languages</h3>
             <div class="flex flex-wrap gap-3 mb-6">
               <span class="px-4 py-1 bg-gray-700 text-gray-300 shadow-sm rounded-full text-sm">🗣️ English – Conversational | Clear | Constantly Improving</span>
               <span class="px-4 py-1 bg-gray-700 text-gray-300 shadow-sm rounded-full text-sm">🗣️ Telugu – Native Speaker | Naturally Fluent</span>
@@ -504,7 +581,7 @@
               <span class="px-4 py-1 bg-gray-700 text-gray-300 shadow-sm rounded-full text-sm">🗣️ Tamil – Basic Understanding | Can Catch the Vibe</span>
             </div>
             
-            <div class="absolute -bottom-4 -right-4 bg-accent-gold p-2 rounded-lg shadow-lg" style="box-shadow: 0 0 15px rgba(251, 191, 36, 0.7);" title="Cameraman">
+            <div class="absolute -bottom-4 -right-4 bg-accent-orange p-2 rounded-lg shadow-lg" style="box-shadow: 0 0 15px var(--shadow-color-light);" title="Cameraman">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
               </svg>
@@ -516,11 +593,11 @@
   </section>
 
   <!-- Education Section (Roadmap/Tree-like Structure) -->
-  <section id="education" class="bg-dark-bg text-gray-300 border-t border-gray-800">
+  <section id="education" class="bg-primary-bg text-secondary-text border-t border-gray-800">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 relative" data-aos="fade-up">
         <span class="gradient-text">Education Roadmap</span>
-        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-soft-blue rounded-full shadow-md shadow-soft-blue/40"></div>
+        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-accent-orange rounded-full shadow-md shadow-orange-500/40"></div>
       </h2>
 
       <div class="roadmap-container relative">
@@ -530,11 +607,11 @@
         <div class="roadmap-item" data-aos="fade-up" data-aos-delay="100">
           <div class="roadmap-circle">1</div>
           <div class="roadmap-content card">
-            <h3 class="text-xl font-semibold text-soft-blue mb-2">B.Tech in Computer Science and Engineering</h3>
-            <p class="text-gray-400 mb-1">Kalasalingam University</p>
-            <p class="text-gray-400 mb-1">Virudhunagar, Tamil Nadu</p>
-            <p class="text-gray-300 mt-4">Expected Graduation: <span class="font-medium text-accent-gold">2027</span></p>
-            <p class="text-gray-300">Current CGPA: <span class="font-medium text-accent-gold">7.42</span> (5th Semester)</p>
+            <h3 class="text-xl font-semibold text-primary-text mb-2">B.Tech in Computer Science and Engineering</h3>
+            <p class="text-secondary-text mb-1">Kalasalingam University</p>
+            <p class="text-secondary-text mb-1">Virudhunagar, Tamil Nadu</p>
+            <p class="text-secondary-text mt-4">Expected Graduation: <span class="font-medium text-accent-orange">2027</span></p>
+            <p class="text-secondary-text">Current CGPA: <span class="font-medium text-accent-orange">7.42</span> (5th Semester)</p>
           </div>
         </div>
 
@@ -542,11 +619,11 @@
         <div class="roadmap-item" data-aos="fade-up" data-aos-delay="200">
           <div class="roadmap-circle">2</div>
           <div class="roadmap-content card">
-            <h3 class="text-xl font-semibold text-soft-blue mb-2">Intermediate (11th & 12th Grade Equivalent)</h3>
-            <p class="text-gray-400 mb-1">Narayana Junior College</p>
-            <p class="text-gray-400 mb-1">Tirupati, Andhra Pradesh</p>
-            <p class="text-gray-300 mt-4">Completion Year: <span class="font-medium text-accent-gold">2023</span></p>
-            <p class="text-gray-300">Percentage: <span class="font-medium text-accent-gold">89.4%</span></p>
+            <h3 class="text-xl font-semibold text-primary-text mb-2">Intermediate (11th & 12th Grade Equivalent)</h3>
+            <p class="text-secondary-text mb-1">Narayana Junior College</p>
+            <p class="text-secondary-text mb-1">Tirupati, Andhra Pradesh</p>
+            <p class="text-secondary-text mt-4">Completion Year: <span class="font-medium text-accent-orange">2023</span></p>
+            <p class="text-secondary-text">Percentage: <span class="font-medium text-accent-orange">89.4%</span></p>
           </div>
         </div>
 
@@ -554,11 +631,11 @@
         <div class="roadmap-item" data-aos="fade-up" data-aos-delay="300">
           <div class="roadmap-circle">3</div>
           <div class="roadmap-content card">
-            <h3 class="text-xl font-semibold text-soft-blue mb-2">Matriculation (10th Grade)</h3>
-            <p class="text-gray-400 mb-1">Narayana School</p>
-            <p class="text-gray-400 mb-1">Tirupati, Andhra Pradesh</p>
-            <p class="text-gray-300 mt-4">Completion Year: <span class="font-medium text-accent-gold">2021</span></p>
-            <p class="text-gray-300">Percentage: <span class="font-medium text-accent-gold">98.5%</span></p>
+            <h3 class="text-xl font-semibold text-primary-text mb-2">Matriculation (10th Grade)</h3>
+            <p class="text-secondary-text mb-1">Narayana School</p>
+            <p class="text-secondary-text mb-1">Tirupati, Andhra Pradesh</p>
+            <p class="text-secondary-text mt-4">Completion Year: <span class="font-medium text-accent-orange">2021</span></p>
+            <p class="text-secondary-text">Percentage: <span class="font-medium text-accent-orange">98.5%</span></p>
           </div>
         </div>
       </div>
@@ -566,30 +643,30 @@
   </section>
 
   <!-- Projects Section -->
-  <section id="projects" class="bg-dark-bg text-gray-300 border-t border-gray-800">
+  <section id="projects" class="bg-secondary-bg text-secondary-text border-t border-gray-800">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 relative" data-aos="fade-up">
         <span class="gradient-text">My Projects</span>
-        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-accent-gold rounded-full shadow-md shadow-accent-gold/40"></div>
+        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-accent-orange rounded-full shadow-md shadow-orange-500/40"></div>
       </h2>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div class="card rounded-xl shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="100">
-          <div class="h-48 bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center border-b border-gray-700">
+          <div class="h-48 bg-gradient-to-br from-orange-600 to-amber-500 flex items-center justify-center border-b border-gray-700">
             <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14h-2v-2h2v2zm0-4h-2V9h2v4zm4 4h-2v-2h2v2zm0-4h-2V9h2v4zM8 7h2v2H8V7zM8 11h2v2H8v-2zm0 4h2v2H8v-2z"/>
             </svg>
           </div>
           <div class="p-6">
-            <h3 class="text-xl font-semibold text-soft-blue mb-2 project-title">CGPA & SGPA Calculator</h3>
-            <p class="text-gray-400 mb-4 project-description">A web-based calculator to compute CGPA and SGPA based on academic grades, built with fundamental web technologies.</p>
+            <h3 class="text-xl font-semibold text-primary-text mb-2 project-title">CGPA & SGPA Calculator</h3>
+            <p class="text-secondary-text mb-4 project-description">A web-based calculator to compute CGPA and SGPA based on academic grades, built with fundamental web technologies.</p>
             <div class="flex flex-wrap gap-2">
-              <span class="px-3 py-1 bg-soft-blue text-white rounded-full text-xs font-medium shadow-sm">HTML</span>
-              <span class="px-3 py-1 bg-soft-blue text-white rounded-full text-xs font-medium shadow-sm">CSS</span>
-              <span class="px-3 py-1 bg-soft-blue text-white rounded-full text-xs font-medium shadow-sm">JavaScript</span>
+              <span class="px-3 py-1 bg-gradient-to-r from-orange-600 to-amber-500 text-white rounded-full text-xs font-medium shadow-sm">HTML</span>
+              <span class="px-3 py-1 bg-gradient-to-r from-orange-600 to-amber-500 text-white rounded-full text-xs font-medium shadow-sm">CSS</span>
+              <span class="px-3 py-1 bg-gradient-to-r from-orange-600 to-amber-500 text-white rounded-full text-xs font-medium shadow-sm">JavaScript</span>
             </div>
             <div class="mt-4 flex justify-between items-center">
-              <a href="https://rajeshwar234.github.io/CGPA-SGPA-calculator/" target="_blank" class="text-soft-blue hover:text-accent-gold font-medium inline-flex items-center">
+              <a href="https://rajeshwar234.github.io/CGPA-SGPA-calculator/" target="_blank" class="text-accent-orange hover:text-accent-gold font-medium inline-flex items-center">
                 View Details
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -612,214 +689,214 @@
     </div>
   </section>
 
-  <section id="skills" class="bg-gray-900 text-gray-300 border-t border-gray-800">
+  <section id="skills" class="bg-primary-bg text-secondary-text border-t border-gray-800">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 relative" data-aos="fade-up">
         <span class="gradient-text">My Skills</span>
-        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-soft-blue rounded-full shadow-md shadow-soft-blue/40"></div>
+        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-accent-orange rounded-full shadow-md shadow-orange-500/40"></div>
       </h2>
 
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
         <div class="skill-card p-6 rounded-lg shadow-sm" data-aos="zoom-in" data-aos-delay="100">
-          <div class="text-soft-blue mb-4">
+          <div class="text-accent-orange mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
             </svg>
           </div>
-          <h3 class="text-lg font-medium text-soft-blue mb-2">Web Development</h3>
-          <p class="text-gray-400 text-sm">HTML, CSS, JavaScript, React</p>
+          <h3 class="text-lg font-medium text-primary-text mb-2">Web Development</h3>
+          <p class="text-secondary-text text-sm">HTML, CSS, JavaScript, React</p>
         </div>
         
         <div class="skill-card p-6 rounded-lg shadow-sm" data-aos="zoom-in" data-aos-delay="200">
-          <div class="text-soft-blue mb-4">
+          <div class="text-accent-orange mb-4">
             <svg class="h-12 w-12" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"/>
             </svg>
           </div>
-          <h3 class="text-lg font-medium text-soft-blue mb-2">Python</h3>
-          <p class="text-gray-400 text-sm">Beginner level, Learning for Web Development</p>
+          <h3 class="text-lg font-medium text-primary-text mb-2">Python</h3>
+          <p class="text-secondary-text text-sm">Beginner level, Learning for Web Development</p>
         </div>
         
         <div class="skill-card p-6 rounded-lg shadow-sm" data-aos="zoom-in" data-aos-delay="300">
-          <div class="text-soft-blue mb-4">
+          <div class="text-accent-orange mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
             </svg>
           </div>
-          <h3 class="text-lg font-medium text-soft-blue mb-2">SQL</h3>
-          <p class="text-gray-400 text-sm">Database management and queries</p>
+          <h3 class="text-lg font-medium text-primary-text mb-2">SQL</h3>
+          <p class="text-secondary-text text-sm">Database management and queries</p>
         </div>
         
         <div class="skill-card p-6 rounded-lg shadow-sm" data-aos="zoom-in" data-aos-delay="400">
-          <div class="text-soft-blue mb-4">
+          <div class="text-accent-orange mb-4">
             <svg class="h-12 w-12" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
               <path d="M8.851 18.56s-.917.534.653.714c1.902.218 2.874.187 4.969-.211 0 0 .552.346 1.321.646-4.699 2.013-10.633-.118-6.943-1.149M8.276 15.933s-1.028.761.542.924c2.032.209 3.636.227 6.413-.308 0 0 .384.389.987.602-5.679 1.661-12.007.13-7.942-1.218M13.116 11.475c1.158 1.333-.304 2.533-.304 2.533s2.939-1.518 1.589-3.418c-1.261-1.772-2.228-2.652 3.007-5.688 0-.001-8.216 2.051-4.292 6.573M19.33 20.504s.679.559-.747.991c-2.712.822-11.288 1.069-13.669.033-.856-.373.75-.89 1.254-.998.527-.114.828-.093.828-.093-.953-.671-6.156 1.317-2.643 1.887 9.58 1.553 17.462-.7 14.977-1.82M9.292 13.21s-4.362 1.036-1.544 1.412c1.189.159 3.561.123 5.77-.062 1.806-.152 3.618-.477 3.618-.477s-.637.272-1.098.587c-4.429 1.165-12.986.623-10.522-.568 2.082-1.006 3.776-.892 3.776-.892M17.116 17.584c4.503-2.34 2.421-4.589.968-4.285-.355.074-.515.138-.515.138s.132-.207.385-.297c2.875-1.011 5.086 2.981-.928 4.562 0-.001.07-.062.09-.118M14.401 0s2.494 2.494-2.365 6.33c-3.896 3.077-.888 4.832-.001 6.836-2.274-2.053-3.943-3.858-2.824-5.539 1.644-2.469 6.197-3.665 5.19-7.627M9.734 23.924c4.322.277 10.959-.153 11.116-2.198 0 0-.302.775-3.572 1.391-3.688.694-8.239.613-10.937.168 0-.001.553.457 3.393.639"/>
             </svg>
           </div>
-          <h3 class="text-lg font-medium text-soft-blue mb-2">Java</h3>
-          <p class="text-gray-400 text-sm">Basic knowledge</p>
+          <h3 class="text-lg font-medium text-primary-text mb-2">Java</h3>
+          <p class="text-secondary-text text-sm">Basic knowledge</p>
         </div>
         
         <div class="skill-card p-6 rounded-lg shadow-sm" data-aos="zoom-in" data-aos-delay="100">
-          <div class="text-soft-blue mb-4">
+          <div class="text-accent-orange mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
             </svg>
           </div>
-          <h3 class="text-lg font-medium text-soft-blue mb-2">Generative AI</h3>
-          <p class="text-gray-400 text-sm">Google Gen AI, Gemini, Imagen</p>
+          <h3 class="text-lg font-medium text-primary-text mb-2">Generative AI</h3>
+          <p class="text-secondary-text text-sm">Google Gen AI, Gemini, Imagen</p>
         </div>
         
         <div class="skill-card p-6 rounded-lg shadow-sm" data-aos="zoom-in" data-aos-delay="200">
-          <div class="text-soft-blue mb-4">
+          <div class="text-accent-orange mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.871 4A17.926 17.926 0 003 12c0 2.874.673 5.59 1.871 8m14.13 0a17.926 17.926 0 001.87-8c0-2.874-.673-5.59-1.87-8M9 9h1.246a1 1 0 01.961.725l1.586 5.55a1 1 0 00.961.725H15m1-7h-.08a2 2 0 00-1.519.698L9.6 15.302A2 2 0 018.08 16H8" />
             </svg>
           </div>
-          <h3 class="text-lg font-medium text-soft-blue mb-2">Deep Learning</h3>
-          <p class="text-gray-400 text-sm">Neural Networks, Computer Vision</p>
+          <h3 class="text-lg font-medium text-primary-text mb-2">Deep Learning</h3>
+          <p class="text-secondary-text text-sm">Neural Networks, Computer Vision</p>
         </div>
         
         <div class="skill-card p-6 rounded-lg shadow-sm" data-aos="zoom-in" data-aos-delay="300">
-          <div class="text-soft-blue mb-4">
+          <div class="text-accent-orange mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
             </svg>
           </div>
-          <h3 class="text-lg font-medium text-soft-blue mb-2">Operating Systems</h3>
-          <p class="text-gray-400 text-sm">Linux, Windows, OS Concepts</p>
+          <h3 class="text-lg font-medium text-primary-text mb-2">Operating Systems</h3>
+          <p class="text-secondary-text text-sm">Linux, Windows, OS Concepts</p>
         </div>
         
         <div class="skill-card p-6 rounded-lg shadow-sm" data-aos="zoom-in" data-aos-delay="400">
-          <div class="text-soft-blue mb-4">
+          <div class="text-accent-orange mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
             </svg>
           </div>
-          <h3 class="text-lg font-medium text-soft-blue mb-2">NLP</h3>
-          <p class="text-gray-400 text-sm">Natural Language Processing, Text Analysis</p>
+          <h3 class="text-lg font-medium text-primary-text mb-2">NLP</h3>
+          <p class="text-secondary-text text-sm">Natural Language Processing, Text Analysis</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="certifications" class="bg-dark-bg text-gray-300 border-t border-gray-800">
+  <section id="certifications" class="bg-primary-bg text-secondary-text border-t border-gray-800">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 relative" data-aos="fade-up">
         <span class="gradient-text">My Certifications</span>
-        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-accent-gold rounded-full shadow-md shadow-accent-gold/40"></div>
+        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-accent-orange rounded-full shadow-md shadow-orange-500/40"></div>
       </h2>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="card rounded-xl shadow-md p-6 flex flex-col" data-aos="fade-up" data-aos-delay="100">
           <div class="h-16 mb-4 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-soft-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-accent-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-soft-blue mb-1">Prompt Design in Vertex AI</h3>
-          <p class="text-gray-400 text-sm mb-4">Google</p>
-          <p class="flex-grow mb-4 text-gray-300">Focused on designing effective prompts for AI models using Vertex AI.</p>
+          <h3 class="text-xl font-semibold text-primary-text mb-1">Prompt Design in Vertex AI</h3>
+          <p class="text-secondary-text text-sm mb-4">Google</p>
+          <p class="flex-grow mb-4 text-secondary-text">Focused on designing effective prompts for AI models using Vertex AI.</p>
           <div class="flex justify-between items-center">
             <span class="text-gray-500 text-sm">2025</span>
-            <a href="https://www.cloudskillsboost.google/public_profiles/d5b78359-6588-4934-a234-896e474852aa/badges/16683589" target="_blank" class="text-soft-blue hover:text-accent-gold font-medium">View Certificate</a>
+            <a href="https://www.cloudskillsboost.google/public_profiles/d5b78359-6588-4934-a234-896e474852aa/badges/16683589" target="_blank" class="text-accent-orange hover:text-accent-gold font-medium">View Certificate</a>
           </div>
         </div>
 
         <div class="card rounded-xl shadow-md p-6 flex flex-col" data-aos="fade-up" data-aos-delay="200">
           <div class="h-16 mb-4 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-soft-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-accent-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-soft-blue mb-1">Build Real World Applications with Gemini and Imagen</h3>
-          <p class="text-gray-400 text-sm mb-4">Google</p>
-          <p class="flex-grow mb-4 text-gray-300">Hands-on experience building applications using Google's Gemini and Imagen models.</p>
+          <h3 class="text-xl font-semibold text-primary-text mb-1">Build Real World Applications with Gemini and Imagen</h3>
+          <p class="text-secondary-text text-sm mb-4">Google</p>
+          <p class="flex-grow mb-4 text-secondary-text">Hands-on experience building applications using Google's Gemini and Imagen models.</p>
           <div class="flex justify-between items-center">
             <span class="text-gray-500 text-sm">2025</span>
-            <a href="https://www.cloudskillsboost.google/public_profiles/d5b78359-6588-4934-a234-896e474852aa/badges/16691163" target="_blank" class="text-soft-blue hover:text-accent-gold font-medium">View Certificate</a>
+            <a href="https://www.cloudskillsboost.google/public_profiles/d5b78359-6588-4934-a234-896e474852aa/badges/16691163" target="_blank" class="text-accent-orange hover:text-accent-gold font-medium">View Certificate</a>
           </div>
         </div>
 
         <div class="card rounded-xl shadow-md p-6 flex flex-col" data-aos="fade-up" data-aos-delay="300">
           <div class="h-16 mb-4 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-soft-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-accent-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-soft-blue mb-1">Build RAG ChatBot with Python</h3>
-          <p class="text-gray-400 text-sm mb-4">Lets Upgrade</p>
-          <p class="flex-grow mb-4 text-gray-300">Practical knowledge in building Retrieval-Augmented Generation (RAG) chatbots using Python.</p>
+          <h3 class="text-xl font-semibold text-primary-text mb-1">Build RAG ChatBot with Python</h3>
+          <p class="text-secondary-text text-sm mb-4">Lets Upgrade</p>
+          <p class="flex-grow mb-4 text-secondary-text">Practical knowledge in building Retrieval-Augmented Generation (RAG) chatbots using Python.</p>
           <div class="flex justify-between items-center">
             <span class="text-gray-500 text-sm">2025</span>
-            <a href="https://drive.google.com/file/d/1-QGqtmE93r6eJ_ZDFQQxvu_G-HyuhvXp/view" target="_blank" class="text-soft-blue hover:text-accent-gold font-medium">View Certificate</a>
+            <a href="https://drive.google.com/file/d/1-QGqtmE93r6eJ_ZDFQQxvu_G-HyuhvXp/view" target="_blank" class="text-accent-orange hover:text-accent-gold font-medium">View Certificate</a>
           </div>
         </div>
 
         <div class="card rounded-xl shadow-md p-6 flex flex-col" data-aos="fade-up" data-aos-delay="400">
           <div class="h-16 mb-4 flex items-center justify-center">
-            <svg class="h-12 w-12 text-soft-blue" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg class="h-12 w-12 text-accent-orange" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"/>
             </svg>
           </div>
-          <h3 class="text-lg font-medium text-soft-blue mb-1">Python Bootcamp</h3>
-          <p class="text-gray-400 text-sm mb-4">Lets Upgrade</p>
-          <p class="flex-grow mb-4 text-gray-300">Comprehensive training in Python programming fundamentals and advanced topics.</p>
+          <h3 class="text-xl font-semibold text-primary-text mb-1">Python Bootcamp</h3>
+          <p class="text-secondary-text text-sm mb-4">Lets Upgrade</p>
+          <p class="flex-grow mb-4 text-secondary-text">Comprehensive training in Python programming fundamentals and advanced topics.</p>
           <div class="flex justify-between items-center">
             <span class="text-gray-500 text-sm">2025</span>
-            <a href="https://drive.google.com/file/d/14SjurUCc-bEysPcIqt29FBnmmHKTOLq7/view" target="_blank" class="text-soft-blue hover:text-accent-gold font-medium">View Certificate</a>
+            <a href="https://drive.google.com/file/d/14SjurUCc-bEysPcIqt29FBnmmHKTOLq7/view" target="_blank" class="text-accent-orange hover:text-accent-gold font-medium">View Certificate</a>
           </div>
         </div>
 
         <div class="card rounded-xl shadow-md p-6 flex flex-col" data-aos="fade-up" data-aos-delay="500">
           <div class="h-16 mb-4 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-soft-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-accent-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-soft-blue mb-1">Database Management System</h3>
-          <p class="text-gray-400 text-sm mb-4">Codechef</p>
-          <p class="flex-grow mb-4 text-gray-300">Understanding of database concepts, SQL, and data management.</p>
+          <h3 class="text-xl font-semibold text-primary-text mb-1">Database Management System</h3>
+          <p class="text-secondary-text text-sm mb-4">Codechef</p>
+          <p class="flex-grow mb-4 text-secondary-text">Understanding of database concepts, SQL, and data management.</p>
           <div class="flex justify-between items-center">
             <span class="text-gray-500 text-sm">2025</span>
-            <a href="https://drive.google.com/file/d/1ksOz7avh1TxrFpSnaYxtNMyX2KcBXWlg/view" target="_blank" class="text-soft-blue hover:text-accent-gold font-medium">View Certificate</a>
+            <a href="https://drive.google.com/file/d/1ksOz7avh1TxrFpSnaYxtNMyX2KcBXWlg/view" target="_blank" class="text-accent-orange hover:text-accent-gold font-medium">View Certificate</a>
           </div>
         </div>
 
         <div class="card rounded-xl shadow-md p-6 flex flex-col" data-aos="fade-up" data-aos-delay="600">
           <div class="h-16 mb-4 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-soft-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-accent-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M4.871 4A17.926 17.926 0 003 12c0 2.874.673 5.59 1.871 8m14.13 0a17.926 17.926 0 001.87-8c0-2.874-.673-5.59-1.87-8M9 9h1.246a1 1 0 01.961.725l1.586 5.55a1 1 0 00.961.725H15m1-7h-.08a2 2 0 00-1.519.698L9.6 15.302A2 2 0 018.08 16H8" />
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-soft-blue mb-1">Solve X AI</h3>
-          <p class="text-gray-400 text-sm mb-4">Kalasalingam University</p>
-          <p class="flex-grow mb-4 text-gray-300">Participation in an AI-focused event/workshop, enhancing AI problem-solving skills.</p>
+          <h3 class="text-xl font-semibold text-primary-text mb-1">Solve X AI</h3>
+          <p class="text-secondary-text text-sm mb-4">Kalasalingam University</p>
+          <p class="flex-grow mb-4 text-secondary-text">Participation in an AI-focused event/workshop, enhancing AI problem-solving skills.</p>
           <div class="flex justify-between items-center">
             <span class="text-gray-500 text-sm">2025</span>
-            <a href="https://drive.google.com/file/d/1vYsjIOGAzwTWfucIxSR7U-2ApbbCcpaY/view" target="_blank" class="text-soft-blue hover:text-accent-gold font-medium">View Certificate</a>
+            <a href="https://drive.google.com/file/d/1vYsjIOGAzwTWfucIxSR7U-2ApbbCcpaY/view" target="_blank" class="text-accent-orange hover:text-accent-gold font-medium">View Certificate</a>
           </div>
         </div>
 
         <div class="card rounded-xl shadow-md p-6 flex flex-col" data-aos="fade-up" data-aos-delay="700">
           <div class="h-16 mb-4 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-soft-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-accent-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-4 8h4v4H8zM12 4h-4v4h4V4zm4 8h-4v4h4v-4zm0-4h-4V4h4v4z"></path>
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-soft-blue mb-1">Figma Workshop</h3>
-          <p class="text-gray-400 text-sm mb-4">Kalasalingam University</p>
-          <p class="flex-grow mb-4 text-gray-300">Hands-on workshop covering the fundamentals of UI/UX design using Figma.</p>
+          <h3 class="text-xl font-semibold text-primary-text mb-1">Figma Workshop</h3>
+          <p class="text-secondary-text text-sm mb-4">Kalasalingam University</p>
+          <p class="flex-grow mb-4 text-secondary-text">Hands-on workshop covering the fundamentals of UI/UX design using Figma.</p>
           <div class="flex justify-between items-center">
             <span class="text-gray-500 text-sm">2024</span>
-            <a href="https://drive.google.com/file/d/1z9TcVxviqmcIYgLGwyYapz72cSi_mNHn/view" target="_blank" class="text-soft-blue hover:text-accent-gold font-medium">View Certificate</a>
+            <a href="https://drive.google.com/file/d/1z9TcVxviqmcIYgLGwyYapz72cSi_mNHn/view" target="_blank" class="text-accent-orange hover:text-accent-gold font-medium">View Certificate</a>
           </div>
         </div>
       </div>
       
       <div class="mt-8 text-center" data-aos="fade-up">
         <a href="javascript:void(0)" class="btn-secondary inline-flex items-center py-3 px-6 rounded-lg shadow-md">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
             <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.115 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
           </svg>
           Will Gain More
@@ -828,29 +905,29 @@
     </div>
   </section>
 
-  <section id="contact" class="bg-gray-900 text-gray-300 border-t border-gray-800">
+  <section id="contact" class="bg-secondary-bg text-secondary-text border-t border-gray-800">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 relative" data-aos="fade-up">
         <span class="gradient-text">Get In Touch</span>
-        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-accent-gold rounded-full shadow-md shadow-accent-gold/40"></div>
+        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-accent-orange rounded-full shadow-md shadow-orange-500/40"></div>
       </h2>
 
       <div class="flex flex-col md:flex-row md:space-x-8">
         <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
           <form id="contactForm" class="card p-8">
             <div class="mb-6">
-              <label for="name" class="block text-soft-blue font-medium mb-2">Name</label>
-              <input type="text" id="name" class="w-full px-4 py-3 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-gold focus:border-accent-gold bg-gray-900 text-gray-200" placeholder="Your Name">
+              <label for="name" class="block text-primary-text font-medium mb-2">Name</label>
+              <input type="text" id="name" class="w-full px-4 py-3 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-orange focus:border-accent-orange bg-secondary-bg text-primary-text" placeholder="Your Name">
             </div>
             
             <div class="mb-6">
-              <label for="email" class="block text-soft-blue font-medium mb-2">Email</label>
-              <input type="email" id="email" class="w-full px-4 py-3 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-gold focus:border-accent-gold bg-gray-900 text-gray-200" placeholder="your.email@example.com">
+              <label for="email" class="block text-primary-text font-medium mb-2">Email</label>
+              <input type="email" id="email" class="w-full px-4 py-3 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-orange focus:border-accent-orange bg-secondary-bg text-primary-text" placeholder="your.email@example.com">
             </div>
             
             <div class="mb-6">
-              <label for="message" class="block text-soft-blue font-medium mb-2">Message</label>
-              <textarea id="message" rows="5" class="w-full px-4 py-3 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-gold focus:border-accent-gold bg-gray-900 text-gray-200" placeholder="Your message..."></textarea>
+              <label for="message" class="block text-primary-text font-medium mb-2">Message</label>
+              <textarea id="message" rows="5" class="w-full px-4 py-3 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-orange focus:border-accent-orange bg-secondary-bg text-primary-text" placeholder="Your message..."></textarea>
             </div>
             
             <button type="submit" class="btn-primary w-full py-3 px-6 rounded-lg shadow-md">Send Message</button>
@@ -859,54 +936,54 @@
         
         <div class="md:w-1/2" data-aos="fade-left">
           <div class="card p-8 h-full">
-            <h3 class="text-2xl font-semibold text-soft-blue mb-6">Contact Information</h3>
+            <h3 class="text-2xl font-semibold text-primary-text mb-6">Contact Information</h3>
             
             <div class="mb-8">
-              <p class="text-gray-400 mb-6">
+              <p class="text-secondary-text mb-6">
                 If you have any questions or would like to collaborate on a project, feel free to reach out!
               </p>
             </div>
             
             <div class="space-y-6">
               <div class="flex items-start">
-                <div class="bg-soft-blue p-3 rounded-full mr-4 text-white shadow-lg">
+                <div class="bg-accent-orange p-3 rounded-full mr-4 text-primary-bg shadow-lg">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
                 <div>
-                  <p class="font-medium text-soft-blue">Email</p>
-                  <a href="mailto:rajeshwarcn@gmail.com" class="text-accent-gold hover:underline">rajeshwarcn@gmail.com</a>
+                  <p class="font-medium text-primary-text">Email</p>
+                  <a href="mailto:rajeshwarcn@gmail.com" class="text-accent-orange hover:underline">rajeshwarcn@gmail.com</a>
                 </div>
               </div>
               
               <div class="flex items-start">
-                <div class="bg-soft-blue p-3 rounded-full mr-4 text-white shadow-lg">
+                <div class="bg-accent-orange p-3 rounded-full mr-4 text-primary-bg shadow-lg">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>
                 </div>
                 <div>
-                  <p class="font-medium text-soft-blue">LinkedIn</p>
-                  <a href="https://linkedin.com/in/rajeswarcharapalli" target="_blank" class="text-accent-gold hover:underline">linkedin.com/in/rajeswarcharapalli</a>
+                  <p class="font-medium text-primary-text">LinkedIn</p>
+                  <a href="https://linkedin.com/in/rajeswarcharapalli" target="_blank" class="text-accent-orange hover:underline">linkedin.com/in/rajeswarcharapalli</a>
                 </div>
               </div>
               
               <div class="mt-12">
-                <p class="text-soft-blue font-medium">Connect with me on social media:</p>
+                <p class="font-medium text-primary-text">Connect with me on social media:</p>
                 <div class="flex mt-4 space-x-4">
-                  <a href="https://linkedin.com/in/rajeswarcharapalli" target="_blank" class="bg-blue-600 p-3 rounded-full text-white hover:bg-accent-gold" style="box-shadow: 0 0 10px rgba(59, 130, 246, 0.7);">
+                  <a href="https://linkedin.com/in/rajeswarcharapalli" target="_blank" class="bg-blue-600 p-3 rounded-full text-white hover:bg-accent-orange" style="box-shadow: 0 0 10px var(--shadow-color-light);">
                     <svg class="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                       <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/>
                     </svg>
                   </a>
-                  <a href="https://x.com/Charapalli87056?t=wP9U0dsT3xgKl8x4ZCUU3g&s=09" target="_blank" class="bg-gray-800 p-3 rounded-full text-white hover:bg-accent-gold" style="box-shadow: 0 0 10px rgba(15, 23, 42, 0.7);">
+                  <a href="https://x.com/Charapalli87056?t=wP9U0dsT3xgKl8x4ZCUU3g&s=09" target="_blank" class="bg-gray-800 p-3 rounded-full text-white hover:bg-accent-orange" style="box-shadow: 0 0 10px var(--shadow-color-light);">
                     <!-- X (Twitter) icon -->
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path d="M18.901 1.153h3.684l-8.625 9.948L24 22.846h-7.406l-5.83-6.732-6.566 6.732H.474l9.167-10.597L0 1.153h7.625l4.819 5.867L18.901 1.153zm-1.077 20.306h2.247L6.87 3.32h-2.31L17.824 21.459z"/>
                     </svg>
                   </a>
-                  <a href="https://www.facebook.com/share/1FChJNUfjG/" target="_blank" class="bg-blue-700 p-3 rounded-full text-white hover:bg-accent-gold" style="box-shadow: 0 0 10px rgba(29, 78, 216, 0.7);">
+                  <a href="https://www.facebook.com/share/1FChJNUfjG/" target="_blank" class="bg-blue-700 p-3 rounded-full text-white hover:bg-accent-orange" style="box-shadow: 0 0 10px var(--shadow-color-light);">
                     <!-- Facebook icon -->
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.505 1.493-3.89 3.776-3.89 1.094 0 2.24.195 2.24.195v2.46h-1.262c-1.225 0-1.604.755-1.604 1.54V12h2.773l-.443 2.891h-2.33V22C18.343 21.128 22 16.991 22 12z"/>
@@ -938,12 +1015,18 @@
       </div>
       
       <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-        <p class="text-gray-600">© 2025 Rajeswar Charapalli. All rights reserved.</p>
+        <p class="text-secondary-text">© 2025 Rajeswar Charapalli. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
-  <button id="backToTopBtn" class="fixed bottom-6 right-6 bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg transform transition-transform scale-0 hover:bg-cyan-600 focus:outline-none" style="box-shadow: 0 0 15px rgba(59, 130, 246, 0.7);">
+  <!-- Mode Switch Button -->
+  <button id="modeSwitchBtn" title="Toggle Theme">
+    <!-- Icon will change based on mode -->
+    <i class="fas fa-sun" id="modeIcon"></i>
+  </button>
+
+  <button id="backToTopBtn" class="fixed bottom-6 right-6 bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg transform transition-transform scale-0 hover:bg-cyan-600 focus:outline-none" style="box-shadow: 0 0 15px var(--shadow-color-light);">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
     </svg>
@@ -955,29 +1038,21 @@
       theme: {
         extend: {
           colors: {
-            'dark-navy': '#0F172A',
-            'medium-gray': '#2D3748',
-            'accent-gold': '#FBBF24', /* Amber/Gold */
-            'soft-blue': '#3B82F6', /* Lighter Blue */
+            'primary-bg': 'var(--primary-bg)',
+            'secondary-bg': 'var(--secondary-bg)',
+            'primary-text': 'var(--primary-text)',
+            'secondary-text': 'var(--secondary-text)',
+            'accent-orange': 'var(--accent-orange)',
+            'accent-gold': 'var(--accent-gold)',
           }
         }
       }
     }
 
-    // Function to show custom message box (simplified as Gemini feature removed)
     function showMessageBox(message) {
-        // Implement a simple alert or a custom non-modal message for form submission success/failure
-        // For now, this function is simplified as project elaboration is removed.
-        // You might want to replace this with a toast notification or a non-blocking UI message.
-        alert(message); // Using alert for immediate feedback, consider a better UI
+        alert(message);
     }
 
-    // Function to hide message box (no longer needed for removed Gemini feature)
-    function hideMessageBox() {
-        // No action needed if using native alert
-    }
-
-    // Initialize AOS animations and event listeners
     document.addEventListener('DOMContentLoaded', function() {
       AOS.init({
         duration: 800,
@@ -1003,13 +1078,12 @@
       // Contact form submit handler
       const contactForm = document.getElementById('contactForm');
       if (contactForm) {
-        contactForm.addEventListener('submit', async function(e) { // Added 'async' keyword
+        contactForm.addEventListener('submit', async function(e) {
           e.preventDefault();
           const name = document.getElementById('name').value;
           const email = document.getElementById('email').value;
           const message = document.getElementById('message').value;
 
-          // Basic validation
           if (!name || !email || !message) {
             showMessageBox("Please fill in all fields before sending your message.");
             return;
@@ -1017,12 +1091,10 @@
 
           showMessageBox(`Sending your message, ${name}...`);
           
-          // For now, it will just show a success message without actually sending.
-          // You would typically integrate with a backend service here to send the email.
           setTimeout(() => {
             showMessageBox(`Thank you for your message, ${name}! Your message has been sent.`);
             contactForm.reset();
-          }, 1500); // Simulate network delay
+          }, 1500);
         });
       }
 
@@ -1065,6 +1137,38 @@
         cursor: true,
         lifeLike: true,
       }).go();
+
+      // Theme Switcher Logic
+      const modeSwitchBtn = document.getElementById('modeSwitchBtn');
+      const modeIcon = document.getElementById('modeIcon');
+      const body = document.body;
+
+      // Check for saved theme preference
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light-mode') {
+        body.classList.add('light-mode');
+        modeIcon.classList.remove('fa-sun');
+        modeIcon.classList.add('fa-moon');
+      } else {
+        // Default to dark mode
+        body.classList.remove('light-mode');
+        modeIcon.classList.remove('fa-moon');
+        modeIcon.classList.add('fa-sun');
+      }
+
+      modeSwitchBtn.addEventListener('click', function() {
+        if (body.classList.contains('light-mode')) {
+          body.classList.remove('light-mode');
+          modeIcon.classList.remove('fa-moon');
+          modeIcon.classList.add('fa-sun');
+          localStorage.setItem('theme', 'dark-mode');
+        } else {
+          body.classList.add('light-mode');
+          modeIcon.classList.remove('fa-sun');
+          modeIcon.classList.add('fa-moon');
+          localStorage.setItem('theme', 'light-mode');
+        }
+      });
     });
   </script>
 </body>
