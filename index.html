@@ -158,11 +158,10 @@
       transform: translateY(0);
     }
 
-    /* Custom Modal/Popup Styling (retained from previous versions) - REMOVED */
     /* Hero Section with background image and overlay */
     #home {
-      /* Your background image URL */
-      background-image: url('https://photos.fife.usercontent.google.com/pw/AP1GczMRIAE0H7_aHhonMu39liXPZFejpVfdIs4dLvjv6lL0NBl21PqrP7e5=w1920-h860-s-no-gm?authuser=0');
+      /* Updated: Your background image URL will now be your uploaded picture */
+      background-image: url('image.png');
       background-size: cover; /* Ensures image covers the whole section */
       background-position: center; /* Centers the image */
       background-repeat: no-repeat; /* Prevents image repetition */
@@ -531,12 +530,11 @@
         <div class="roadmap-item" data-aos="fade-up" data-aos-delay="100">
           <div class="roadmap-circle">1</div>
           <div class="roadmap-content card">
-            <h3 class="text-xl font-semibold text-soft-blue mb-2">Graduation</h3>
+            <h3 class="text-xl font-semibold text-soft-blue mb-2">B.Tech in Computer Science and Engineering</h3>
             <p class="text-gray-400 mb-1">Kalasalingam University</p>
-            <p class="text-gray-400 mb-1">Virudhunagar, TamilNadu</p>
-            <p class="text-gray-300 mb-4">Bachelors of Technology in Computer Science and Engineering</p>
-            <p class="text-gray-300">Expected Graduation: <span class="font-medium text-accent-gold">2027</span></p>
-            <p class="text-gray-300">CGPA: <span class="font-medium text-accent-gold">7.42</span></p>
+            <p class="text-gray-400 mb-1">Virudhunagar, Tamil Nadu</p>
+            <p class="text-gray-300 mt-4">Expected Graduation: <span class="font-medium text-accent-gold">2027</span></p>
+            <p class="text-gray-300">Current CGPA: <span class="font-medium text-accent-gold">7.42</span> (5th Semester)</p>
           </div>
         </div>
 
@@ -544,11 +542,11 @@
         <div class="roadmap-item" data-aos="fade-up" data-aos-delay="200">
           <div class="roadmap-circle">2</div>
           <div class="roadmap-content card">
-            <h3 class="text-xl font-semibold text-soft-blue mb-2">Intermediate</h3>
+            <h3 class="text-xl font-semibold text-soft-blue mb-2">Intermediate (11th & 12th Grade Equivalent)</h3>
             <p class="text-gray-400 mb-1">Narayana Junior College</p>
-            <p class="text-gray-400 mb-4">Tirupati</p>
-            <p class="text-gray-300">Grade: <span class="font-medium text-accent-gold">89.4%</span></p>
-            <p class="text-gray-300">(2021-2023)</p>
+            <p class="text-gray-400 mb-1">Tirupati, Andhra Pradesh</p>
+            <p class="text-gray-300 mt-4">Completion Year: <span class="font-medium text-accent-gold">2023</span></p>
+            <p class="text-gray-300">Percentage: <span class="font-medium text-accent-gold">89.4%</span></p>
           </div>
         </div>
 
@@ -556,11 +554,11 @@
         <div class="roadmap-item" data-aos="fade-up" data-aos-delay="300">
           <div class="roadmap-circle">3</div>
           <div class="roadmap-content card">
-            <h3 class="text-xl font-semibold text-soft-blue mb-2">Matriculation</h3>
+            <h3 class="text-xl font-semibold text-soft-blue mb-2">Matriculation (10th Grade)</h3>
             <p class="text-gray-400 mb-1">Narayana School</p>
-            <p class="text-gray-400 mb-4">Tirupati</p>
-            <p class="text-gray-300">Grade: <span class="font-medium text-accent-gold">98.5%</span></p>
-            <p class="text-gray-300">2021</p>
+            <p class="text-gray-400 mb-1">Tirupati, Andhra Pradesh</p>
+            <p class="text-gray-300 mt-4">Completion Year: <span class="font-medium text-accent-gold">2021</span></p>
+            <p class="text-gray-300">Percentage: <span class="font-medium text-accent-gold">98.5%</span></p>
           </div>
         </div>
       </div>
@@ -597,7 +595,6 @@
                   <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
               </a>
-              <!-- Removed the Elaborate button -->
             </div>
           </div>
         </div>
@@ -952,8 +949,6 @@
     </svg>
   </button>
 
-  <!-- Removed message modal overlay -->
-
   <script id="app-script">
     // Define custom Tailwind colors for easier use
     tailwind.config = {
@@ -981,8 +976,6 @@
     function hideMessageBox() {
         // No action needed if using native alert
     }
-
-    // Gemini API call logic for project elaboration - REMOVED
 
     // Initialize AOS animations and event listeners
     document.addEventListener('DOMContentLoaded', function() {
